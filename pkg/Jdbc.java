@@ -36,4 +36,3 @@ public class Jdbc {
 
 //	java/jdk.../jre/lib/ext 에도 ojdbc6.jar 넣기
 //	build path 에서 add external jar <-
-//	java/jre/lib/ext 에 ojdbc6.jar 넣기
