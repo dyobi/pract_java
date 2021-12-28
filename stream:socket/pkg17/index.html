@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HELLO</title>
+</head>
+<body>
+<h3>채팅</h3>
+<textarea rows="10" cols="50" readonly id="ta1"></textarea><br>
+<h3>Who?</h3>
+<input type="text" id="who1" value="홍길동">
+<h3>보낼 글</h3>
+<input type="text" id="chat1" onkeyup="enterkey()">
+<input type="submit" value="가자" onclick="kajaChool()"/>
+</body>
+<script>
+    const enterkey = () => {
+        // ASCII 13 = Carriage Return [Enter]
+        if (Event.keyCode === 13) kajaChool();
+    }
+
+    const kajaChool = () => {
+        document.getElementById("who1").disabled = true;
+        ta1.value += "[" + who1.value + "] " + chat1.value + "\n";
+        ws1.send("[" + who1.value + "] " + chat1.value);
+
+        chat1.value = "";
+        chat1.focus();
+    }
+</script>
+<script>
+    // SSL 일 경우 wss: 사용
+    // SSL : Secure Socket Layer 을 말하며 TLS(Transport Layer Security) 라고도함
+    // SSL 은 client 와 server 사이의 통신등에 암호화를 사용하는 것으로
+    // SMTP, FTP 등 다양한 곳에서 사용
+    // https 는 http 에 SSL 을 적용한 것
+
+    let ws1 = new WebSocket("ws://localhost:8080/websocket_war_exploded/kaja");
+    // websocket 객체를 생성 후 ws://~~~ 서버에 접속
+    // ws1.send()에 의해 서버로 채팅이 전송됨
+
+    // ws://localhost:8080... 는 http:// 과 유사
+    // wss://localhost:8080... 는 https:// 과 유사
+
+    let ta1 = document.getElementById("ta1");
+
+    ws1.onerror = (aa) => {
+        alert("Error");
+    };
+
+    ws1.onopen = (aa) => {
+        alert("[채팅 시작하세요]");
+        who1.focus();
+        who1.select();
+    };
+
+    ws1.onmessage = (aa) => {
+        ta1.value += aa.data + "\n";
+    };
+</script>
+</html>
