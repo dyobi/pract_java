@@ -35,3 +35,28 @@ public class temp {
 // - websocket 작동하기 (http는 다른 client의 요청이 없으면 응답할 수 없음)
 //   (client ---- server로 // 서버는  다른 client로 전송 ---- client)
 //       HTTP > AJAX > WEBSOCKET
+//
+// 
+//
+// ######### FRONT CONTROLLER ##########
+//
+// 일단 서블릿은 controller 에서 사용 (business logic)
+// view - jsp , controller - servlet(.java)(웹자바, http)
+//
+// ### CONTROLLER
+// 필요에 따라 여러개의 컨트롤러를 만들어야함(수정, 삭제...)
+// 	오히려 spring 에서는 이렇게 여러개 컨트롤러를 사용
+//
+// # web의 mvc2 에서의 문제점
+// 	controller가 많다
+// 	총괄하는게 없다
+// 	일관성도 없다
+// 	컨트롤러에 접근하는 방법이 다양할 수도 있다
+// 	<a href="http:// ....서블릿명">
+// 	<a href="서블릿명"> // <a href="hakjum">
+// 	<form action="">
+//
+// # 해결
+// 	Front controller 를 사용 (총괄매니저), 단 소스가 길어질수 있음
+// 	 - 별도로 서비스 부분을 만들어 해결
+// 	접미사에 .do 를 붙여 사용 (.bo  .co...)
